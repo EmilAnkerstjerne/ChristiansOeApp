@@ -57,8 +57,6 @@ namespace ChristiansOeApp
             watcher.PositionChanged += (sender1, args) => nearbyAttractions(args.Position.Location);
             watcher.TryStart(false, TimeSpan.FromMilliseconds(2000));
 
-            //For testing
-            //nearbyAttractions(new GeoCoordinate(55.32058542028701, 15.186714258259094));
 
             void nearbyAttractions(GeoCoordinate coord)
             {
@@ -127,16 +125,6 @@ namespace ChristiansOeApp
             GeoCoordinate deviceCoord = watcher.Position.Location;
             playStory(checkDistances(deviceCoord).FileName);
             watcher2.Dispose();
-
-            //watcher.PositionChanged += (sender1, args) => playStory(checkDistances(args.Position.Location).FileName);
-            //watcher.TryStart(false, TimeSpan.FromMilliseconds(2000));
-
-
-
-
-
-            //For testing
-            //playStory(checkDistances(new GeoCoordinate(55.32058542028701, 15.186714258259094)).FileName);
         }
 
 
@@ -181,9 +169,6 @@ namespace ChristiansOeApp
             void watcher_PositionChanged(object sender1, GeoPositionChangedEventArgs<GeoCoordinate> x)
             {
                 deviceCoord = new GeoCoordinate(x.Position.Location.Latitude, x.Position.Location.Longitude);
-
-                //For testing
-                //deviceCoord = new GeoCoordinate(55.32058542028701, 15.186714258259094);
 
                 double distance = Math.Round(deviceCoord.GetDistanceTo(distanceToDock), 0);
                 distToShip.Text = distance.ToString() + " meter til færgen.";
