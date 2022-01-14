@@ -10,8 +10,6 @@ namespace ChristiansOeApp
 {
     public partial class Form1 : Form
     {
-
-
         public Form1()
         {
             InitializeComponent();
@@ -21,7 +19,6 @@ namespace ChristiansOeApp
         GeoCoordinateWatcher watcher = new GeoCoordinateWatcher();
         SpeechSynthesizer synthesizer = new SpeechSynthesizer();
         Attraction[] attractions;
-
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -34,7 +31,6 @@ namespace ChristiansOeApp
                 new Attraction("Fængslet Ballonen", new GeoCoordinate(55.31996652774902, 15.184520396488354), "faengsletBallonen"),
                 new Attraction("Kongens Bastion", new GeoCoordinate(55.317781715389316, 15.188406982107372), "kongensBastion")
             };
-
         }
 
         //Stories
@@ -49,7 +45,6 @@ namespace ChristiansOeApp
             watcher.PositionChanged += (sender1, args) => NearbyAttractions(args.Position.Location);
             watcher.TryStart(false, TimeSpan.FromMilliseconds(2000));
 
-
             void NearbyAttractions(GeoCoordinate coord)
             {
                 Attraction nearbyAttraction = CheckDistances(coord);
@@ -62,13 +57,9 @@ namespace ChristiansOeApp
                     nearbyAttractionButton.Text = "Ingen fortællinger i nærheden";
                     nearbyAttractionButton.Enabled = false;
                 }
-                
             }
-            
-
-
-
         }
+
         private Attraction CheckDistances(GeoCoordinate coord)
         {
             foreach (Attraction attraction in attractions)
@@ -129,12 +120,6 @@ namespace ChristiansOeApp
             MapPage(true);
             StoriesPage(false);
             BackToShipPage(false);
-
-            string path = Directory.GetCurrentDirectory();
-            Console.WriteLine(Path.GetFullPath(Path.Combine(path, @"..\..\")) + @"Properties\");
-
-
-
         }
 
         //Back to ship
@@ -144,7 +129,6 @@ namespace ChristiansOeApp
             BackToShipPage(true);
             MapPage(false);
             StoriesPage(false);
-
 
             //ChristiansOe dock coordinates
             GeoCoordinate distanceToDock = new GeoCoordinate(55.320769, 15.186029);
@@ -160,23 +144,18 @@ namespace ChristiansOeApp
             
             //Position changed
             watcher = new GeoCoordinateWatcher();
-            watcher.PositionChanged += new EventHandler<GeoPositionChangedEventArgs<GeoCoordinate>>(Watcher_PositionChanged);
+            watcher.PositionChanged += (sender1, args) => SetLabelDistanceToShip(args.Position.Location);
             watcher.TryStart(false, TimeSpan.FromMilliseconds(2000));
-            
-            //Method for displaying the distance from the device's location to the docks
-            void Watcher_PositionChanged(object sender1, GeoPositionChangedEventArgs<GeoCoordinate> x)
-            {
-                deviceCoord = new GeoCoordinate(x.Position.Location.Latitude, x.Position.Location.Longitude);
 
-                double distance = Math.Round(deviceCoord.GetDistanceTo(distanceToDock), 0);
+            //Method for calculating and setting label to show the distance from the input coordinates to the docks
+            void SetLabelDistanceToShip(GeoCoordinate coord)
+            {
+                double distance = Math.Round(coord.GetDistanceTo(distanceToDock), 0);
                 distToShip.Text = distance.ToString() + " meter til færgen.";
-                timeToShip.Text = (Math.Round((distance/3000)*60, 0)).ToString() + " minutter til færgen.";
+                timeToShip.Text = (Math.Round((distance / 3000) * 60, 0)).ToString() + " minutter til færgen.";
 
             }
         }
-
-
-        
 
         //Pages
         private void MapPage(bool visible)
@@ -194,7 +173,6 @@ namespace ChristiansOeApp
             nearbyStoriesLabel.Visible = visible;
 
         }
-
         private void BackToShipPage(bool visible)
         {
             distToShip.Visible = visible;
