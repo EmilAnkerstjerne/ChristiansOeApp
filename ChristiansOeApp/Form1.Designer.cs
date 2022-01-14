@@ -52,7 +52,7 @@
             this.mapButton.TabIndex = 0;
             this.mapButton.Text = "Kort";
             this.mapButton.UseVisualStyleBackColor = true;
-            this.mapButton.Click += new System.EventHandler(this.mapButton_Click);
+            this.mapButton.Click += new System.EventHandler(this.MapButton_Click);
             // 
             // storiesButton
             // 
@@ -62,7 +62,7 @@
             this.storiesButton.TabIndex = 1;
             this.storiesButton.Text = "Fortællinger";
             this.storiesButton.UseVisualStyleBackColor = true;
-            this.storiesButton.Click += new System.EventHandler(this.stories_Click);
+            this.storiesButton.Click += new System.EventHandler(this.Stories_Click);
             // 
             // backToShipButton
             // 
@@ -72,7 +72,7 @@
             this.backToShipButton.TabIndex = 2;
             this.backToShipButton.Text = "Tilbage til færgen";
             this.backToShipButton.UseVisualStyleBackColor = true;
-            this.backToShipButton.Click += new System.EventHandler(this.backToShipButton_Click);
+            this.backToShipButton.Click += new System.EventHandler(this.BackToShipButton_Click);
             // 
             // mapPicture
             // 
@@ -82,7 +82,7 @@
             this.mapPicture.Size = new System.Drawing.Size(1077, 776);
             this.mapPicture.TabIndex = 3;
             this.mapPicture.TabStop = false;
-            this.mapPicture.Click += new System.EventHandler(this.mapPicture_Click);
+            this.mapPicture.Click += new System.EventHandler(this.MapPicture_Click);
             // 
             // distToShip
             // 
@@ -114,7 +114,7 @@
             this.aboutChr.Text = "Om Christiansø";
             this.aboutChr.UseVisualStyleBackColor = true;
             this.aboutChr.Visible = false;
-            this.aboutChr.Click += new System.EventHandler(this.aboutChr_Click);
+            this.aboutChr.Click += new System.EventHandler(this.AboutChr_Click);
             // 
             // stopSpeech
             // 
@@ -125,7 +125,7 @@
             this.stopSpeech.Text = "Stop tale";
             this.stopSpeech.UseVisualStyleBackColor = true;
             this.stopSpeech.Visible = false;
-            this.stopSpeech.Click += new System.EventHandler(this.stopSpeech_Click);
+            this.stopSpeech.Click += new System.EventHandler(this.StopSpeech_Click);
             // 
             // pauseSpeechButton
             // 
@@ -136,7 +136,7 @@
             this.pauseSpeechButton.Text = "Pause tale";
             this.pauseSpeechButton.UseVisualStyleBackColor = true;
             this.pauseSpeechButton.Visible = false;
-            this.pauseSpeechButton.Click += new System.EventHandler(this.pauseSpeechButton_Click);
+            this.pauseSpeechButton.Click += new System.EventHandler(this.PauseSpeechButton_Click);
             // 
             // resumeSpeechButton
             // 
@@ -147,7 +147,7 @@
             this.resumeSpeechButton.Text = "Fortsæt tale";
             this.resumeSpeechButton.UseVisualStyleBackColor = true;
             this.resumeSpeechButton.Visible = false;
-            this.resumeSpeechButton.Click += new System.EventHandler(this.resumeSpeechButton_Click);
+            this.resumeSpeechButton.Click += new System.EventHandler(this.ResumeSpeechButton_Click);
             // 
             // nearbyAttractionButton
             // 
@@ -159,7 +159,7 @@
             this.nearbyAttractionButton.Text = "Ingen fortællinger i nærheden";
             this.nearbyAttractionButton.UseVisualStyleBackColor = true;
             this.nearbyAttractionButton.Visible = false;
-            this.nearbyAttractionButton.Click += new System.EventHandler(this.nearbyAttractionButton_Click);
+            this.nearbyAttractionButton.Click += new System.EventHandler(this.NearbyAttractionButton_Click);
             // 
             // nearbyStoriesLabel
             // 

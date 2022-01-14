@@ -1,17 +1,9 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Threading;
 using System.Device.Location;
 using System.Speech.Synthesis;
-using System.Globalization;
+
 
 
 namespace ChristiansOeApp
@@ -46,21 +38,21 @@ namespace ChristiansOeApp
         }
 
         //Stories
-        private void stories_Click(object sender, EventArgs e)
+        private void Stories_Click(object sender, EventArgs e)
         {
             //Shows right elements
-            storiesPage(true);
-            mapPage(false);
-            backToShipPage(false);
+            StoriesPage(true);
+            MapPage(false);
+            BackToShipPage(false);
 
             watcher = new GeoCoordinateWatcher();
-            watcher.PositionChanged += (sender1, args) => nearbyAttractions(args.Position.Location);
+            watcher.PositionChanged += (sender1, args) => NearbyAttractions(args.Position.Location);
             watcher.TryStart(false, TimeSpan.FromMilliseconds(2000));
 
 
-            void nearbyAttractions(GeoCoordinate coord)
+            void NearbyAttractions(GeoCoordinate coord)
             {
-                Attraction nearbyAttraction = checkDistances(coord);
+                Attraction nearbyAttraction = CheckDistances(coord);
 
                 if(nearbyAttraction != null)
                 {
@@ -77,7 +69,7 @@ namespace ChristiansOeApp
 
 
         }
-        private Attraction checkDistances(GeoCoordinate coord)
+        private Attraction CheckDistances(GeoCoordinate coord)
         {
             foreach (Attraction attraction in attractions)
             {
@@ -90,62 +82,63 @@ namespace ChristiansOeApp
             return null;
         }
 
-        private void resumeSpeechButton_Click(object sender, EventArgs e)
+        private void ResumeSpeechButton_Click(object sender, EventArgs e)
         {
             synthesizer.Resume();
         }
 
-        private void pauseSpeechButton_Click(object sender, EventArgs e)
+        private void PauseSpeechButton_Click(object sender, EventArgs e)
         {
             synthesizer.Pause();
         }
 
-        private void stopSpeech_Click(object sender, EventArgs e)
+        private void StopSpeech_Click(object sender, EventArgs e)
         {
             synthesizer.SpeakAsyncCancelAll();
         }
 
-        private void playStory(string name)
+        private void PlayStory(string name)
         {
             string path = Directory.GetCurrentDirectory();
             string story = File.ReadAllText(path + "/" + name + ".txt");
 
             synthesizer.SpeakAsync(story);
+            synthesizer.Resume();
 
         }
 
-        private void aboutChr_Click(object sender, EventArgs e)
+        private void AboutChr_Click(object sender, EventArgs e)
         {
-            playStory("aboutChr");
+            PlayStory("aboutChr");
         }
 
-        private void nearbyAttractionButton_Click(object sender, EventArgs e)
+        private void NearbyAttractionButton_Click(object sender, EventArgs e)
         {
             GeoCoordinateWatcher watcher2 = new GeoCoordinateWatcher();
             GeoCoordinate deviceCoord = watcher.Position.Location;
-            playStory(checkDistances(deviceCoord).FileName);
+            PlayStory(CheckDistances(deviceCoord).FileName);
             watcher2.Dispose();
         }
 
 
 
         //Map
-        private void mapButton_Click(object sender, EventArgs e)
+        private void MapButton_Click(object sender, EventArgs e)
         {
             //Shows right elements
-            mapPage(true);
-            storiesPage(false);
-            backToShipPage(false);
+            MapPage(true);
+            StoriesPage(false);
+            BackToShipPage(false);
 
         }
 
         //Back to ship
-        private void backToShipButton_Click(object sender, EventArgs e)
+        private void BackToShipButton_Click(object sender, EventArgs e)
         {
             //Shows right elements
-            backToShipPage(true);
-            mapPage(false);
-            storiesPage(false);
+            BackToShipPage(true);
+            MapPage(false);
+            StoriesPage(false);
 
 
             //ChristiansOe dock coordinates
@@ -162,11 +155,11 @@ namespace ChristiansOeApp
             
             //Position changed
             watcher = new GeoCoordinateWatcher();
-            watcher.PositionChanged += new EventHandler<GeoPositionChangedEventArgs<GeoCoordinate>>(watcher_PositionChanged);
+            watcher.PositionChanged += new EventHandler<GeoPositionChangedEventArgs<GeoCoordinate>>(Watcher_PositionChanged);
             watcher.TryStart(false, TimeSpan.FromMilliseconds(2000));
             
             //Method for displaying the distance from the device's location to the docks
-            void watcher_PositionChanged(object sender1, GeoPositionChangedEventArgs<GeoCoordinate> x)
+            void Watcher_PositionChanged(object sender1, GeoPositionChangedEventArgs<GeoCoordinate> x)
             {
                 deviceCoord = new GeoCoordinate(x.Position.Location.Latitude, x.Position.Location.Longitude);
 
@@ -181,12 +174,12 @@ namespace ChristiansOeApp
         
 
         //Pages
-        private void mapPage(bool visible)
+        private void MapPage(bool visible)
         {
             mapPicture.Visible = visible;
         }
 
-        private void storiesPage(bool visible)
+        private void StoriesPage(bool visible)
         {
             stopSpeech.Visible = visible;
             resumeSpeechButton.Visible = visible;
@@ -197,7 +190,7 @@ namespace ChristiansOeApp
 
         }
 
-        private void backToShipPage(bool visible)
+        private void BackToShipPage(bool visible)
         {
             distToShip.Visible = visible;
             timeToShip.Visible = visible;
@@ -218,7 +211,7 @@ namespace ChristiansOeApp
             public string FileName { get; }
         }
 
-        private void mapPicture_Click(object sender, EventArgs e)
+        private void MapPicture_Click(object sender, EventArgs e)
         {
 
         }
