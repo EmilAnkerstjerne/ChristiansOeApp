@@ -99,8 +99,8 @@ namespace ChristiansOeApp
 
         private void PlayStory(string name)
         {
-            string path = Directory.GetCurrentDirectory();
-            string story = File.ReadAllText(path + "/" + name + ".txt");
+            string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\")) + @"Properties\";
+            string story = File.ReadAllText(path + @"\" + name + ".txt");
 
             synthesizer.SpeakAsync(story);
             synthesizer.Resume();
@@ -129,6 +129,11 @@ namespace ChristiansOeApp
             MapPage(true);
             StoriesPage(false);
             BackToShipPage(false);
+
+            string path = Directory.GetCurrentDirectory();
+            Console.WriteLine(Path.GetFullPath(Path.Combine(path, @"..\..\")) + @"Properties\");
+
+
 
         }
 
